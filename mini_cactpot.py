@@ -1,9 +1,9 @@
 import random
 
+# TODO (1) - Add gambling option which scales earnings based on wager.
 class mini_cactpot:
 
     def __init__(self):
-        
         self.grid_values = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
         self.grid_display = list()
         self.earnings = 0
@@ -17,6 +17,7 @@ class mini_cactpot:
             print("\n=====================\n> Fatal Error -", e)
     
     
+    # TODO (2) - Convert earnings to scaled payouts based on wager or initial value.
     def initialize(self):
         random.shuffle(self.grid_values)
         self.choices = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
@@ -44,11 +45,14 @@ class mini_cactpot:
         }
     
     
+    # TODO (3) - Finalize a display output.
+    # TODO (4) - Create general class for hanlding output.
     def new_game(self):
         while self.run:
             self.choices_remaining = 3
             self.sum = 0
             self.initialize()
+            print("\nSTARTING NEW GAME!\n")
             
             while self.choices_remaining:
             
@@ -65,7 +69,7 @@ class mini_cactpot:
             self.print_payouts()
             self.play_again_prompt()
     
-        
+    # TODO (5) - Create general error handling class.    
     def play_again_prompt(self):
         player_input = input("Play again? (Y/n)")
         
@@ -81,8 +85,9 @@ class mini_cactpot:
     def hint_prompt(self):
         awaiting_input = True
 
+        print("Input tile ("+str(self.choices_remaining)+" left):")
         while awaiting_input:
-            player_input = input("Input tile ("+str(self.choices_remaining)+" left):")
+            player_input = input()
             
             if player_input == "quit":
                 self.run = False
@@ -97,9 +102,7 @@ class mini_cactpot:
                 self.choices_remaining -= 1
                 
             else:
-                print("\n>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<\n"\
-                        " Invalid input! -  Please input one of the following: "\
-                        "\n   ", self.remaining_choices, "\n>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<")
+                print("ERROR!! - Invalid input! (remaining options: ", str(self.remaining_choices)[1:-1].replace("'",'') + ')')
 
 
     def print_hintbox(self):
@@ -109,11 +112,11 @@ class mini_cactpot:
         " | "+self.grid_display[3]+" | "+self.grid_display[4]+" | "+self.grid_display[5]+" |\n"\
         " |---|---|---|\n"\
         " | "+self.grid_display[6]+" | "+self.grid_display[7]+" | "+self.grid_display[8]+" |\n"\
-        " -------------")
+        " -------------\n")
     
     
     def print_selectbox(self):
-        print("\n\n D    E    F    G\n   -------------\n"\
+        print("\n\n D    E   F   G    H\n    -------------\n"\
         " C  | "+self.grid_display[0]+" | "+self.grid_display[1]+" | "+self.grid_display[2]+" |\n"\
         "    |---|---|---|\n"\
         " B  | "+self.grid_display[3]+" | "+self.grid_display[4]+" | "+self.grid_display[5]+" |\n"\
@@ -151,7 +154,7 @@ class mini_cactpot:
     
     
     def print_winbox(self):
-        print("\n\n D    E    F    G\n    -------------\n"\
+        print("\n\n D    E   F   G    H\n   -------------\n"\
         " C  | "+self.grid_values[0]+" | "+self.grid_values[1]+" | "+self.grid_values[2]+" |\n"\
         "    |---|---|---|\n"\
         " B  | "+self.grid_values[3]+" | "+self.grid_values[4]+" | "+self.grid_values[5]+" |\n"\
