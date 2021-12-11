@@ -1,6 +1,12 @@
 import random
 
 # TODO (1) - Add gambling option which scales earnings based on wager.
+# TODO (2) - Convert earnings to scaled payouts based on wager or initial value.
+# TODO (3) - Finalize a display output.
+# TODO (4) - Create general class for hanlding output.
+# TODO (5) - Create general error handling class.   
+# TODO (6) - Add final row selection 'H'.
+# TODO (7) - Add initial revealed tile.
 class mini_cactpot:
 
     def __init__(self):
@@ -17,7 +23,6 @@ class mini_cactpot:
             print("\n=====================\n> Fatal Error -", e)
     
     
-    # TODO (2) - Convert earnings to scaled payouts based on wager or initial value.
     def initialize(self):
         random.shuffle(self.grid_values)
         self.choices = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
@@ -45,8 +50,6 @@ class mini_cactpot:
         }
     
     
-    # TODO (3) - Finalize a display output.
-    # TODO (4) - Create general class for hanlding output.
     def new_game(self):
         while self.run:
             self.choices_remaining = 3
@@ -69,7 +72,7 @@ class mini_cactpot:
             self.print_payouts()
             self.play_again_prompt()
     
-    # TODO (5) - Create general error handling class.    
+    
     def play_again_prompt(self):
         player_input = input("Play again? (Y/n)")
         
