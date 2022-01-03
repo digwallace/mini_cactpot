@@ -22,41 +22,21 @@ class mini_cactpot:
     
     
     def initialize(self):
+        self.choices_remaining = 3
+        self.sum = 0
         random.shuffle(self.grid_values)
         self.choices = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
         self.remaining_choices = self.choices.copy()
         self.grid_display = self.choices.copy()
-        self.payouts = {6:10000
-            , 7:36
-            , 8:720
-            , 9:360
-            , 10:80
-            , 11:252
-            , 12:108
-            , 13:72
-            , 14:54
-            , 15:180
-            , 16:72
-            , 17:180
-            , 18:119
-            , 19:36
-            , 20:306
-            , 21:1080
-            , 22:144
-            , 23:1800
-            , 24:3600
-            }
+        self.payouts = {6:10000, 7:36, 8:720, 9:360, 10:80, 11:252, 12:108, 13:72, 14:54, 15:180, 16:72, 17:180, 18:119, 19:36, 20:306, 21:1080, 22:144, 23:1800, 24:3600}
 
 
     def new_game(self):
         while self.run:
-            self.choices_remaining = 3
-            self.sum = 0
             self.initialize()
             print("\nSTARTING NEW GAME!\n")
             
             while self.choices_remaining:
-            
                 self.print_hintbox()
                 self.hint_prompt()
                 self.print_divider()
@@ -64,13 +44,9 @@ class mini_cactpot:
             self.set_select_gamebox()
             self.print_selectbox()
             self.row_prompt()
-            self.get_score()
-            self.print_divider()
-            self.print_divider()
-            self.print_winbox()
-            self.print_divider()
-            
             self.print_payouts()
+            self.print_winbox()
+            self.get_score()
             self.play_again_prompt()
     
     
@@ -119,7 +95,7 @@ class mini_cactpot:
         " -------------\n")
     
     
-    def print_selectbox(self):
+    def print_selectbox(self, row_label=False):
         print("\n\n D    E   F   G    H\n    -------------\n"\
         " C  | "+self.grid_display[0]+" | "+self.grid_display[1]+" | "+self.grid_display[2]+" |\n"\
         "    |---|---|---|\n"\
