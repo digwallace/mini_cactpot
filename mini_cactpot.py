@@ -188,7 +188,7 @@ class mini_cactpot:
         elif row == 'G':
             self.sum = int(self.grid_values[8]) + int(self.grid_values[5]) + int(self.grid_values[2])
         elif row == 'H':
-            self.sum = int(self.grid_values[8]) + int(self.grid_values[4]) + int(self.grid_values[6])
+            self.sum = int(self.grid_values[2]) + int(self.grid_values[4]) + int(self.grid_values[6])
             
      
     def print_divider(self):
