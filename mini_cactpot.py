@@ -47,19 +47,22 @@ class mini_cactpot:
             self.print_payouts()
             self.print_winbox()
             self.get_score()
-            self.play_again_prompt()
+            while not self.play_again_prompt():
+                continue
+            
     
     
     def play_again_prompt(self):
         player_input = input("Play again? (Y/n)")
         
         if player_input.upper() == "Y":
-            return
+            return True
         elif player_input.upper() == "N":
             print("\nThanks for playing!")
             exit(0)
-        else:
-            print(" Invalid input! - Enter \"Y\" or \"y\" for Yes, \"N\" or \"n\" for no.")
+        
+        print(" Invalid input! - Enter \"Y\" or \"y\" for Yes, \"N\" or \"n\" for no.")
+        return False
     
     
     def hint_prompt(self):
