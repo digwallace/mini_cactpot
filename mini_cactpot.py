@@ -1,4 +1,6 @@
+import pandas
 import random
+import tabulate
 
 # TODO (1) - Add gambling option which scales earnings based on wager.
 # TODO (2) - Convert earnings to scaled payouts based on wager or initial value.
@@ -10,17 +12,13 @@ import random
 class mini_cactpot:
 
     def __init__(self):
-        self.grid_values = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
-        self.grid_display = list()
+        self.grid_values    = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+        self.valid_rows     = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+        self.grid_display   = list()
         self.earnings = 0
         self.run = True
         
-        try:
-        
-            self.new_game()
-            
-        except Exception as e:
-            print("\n=====================\n> Fatal Error -", e)
+        self.new_game()
     
     
     def initialize(self):
@@ -47,9 +45,9 @@ class mini_cactpot:
             , 22:144
             , 23:1800
             , 24:3600
-        }
-    
-    
+            }
+
+
     def new_game(self):
         while self.run:
             self.choices_remaining = 3
@@ -67,7 +65,10 @@ class mini_cactpot:
             self.print_selectbox()
             self.row_prompt()
             self.get_score()
+            self.print_divider()
+            self.print_divider()
             self.print_winbox()
+            self.print_divider()
             
             self.print_payouts()
             self.play_again_prompt()
@@ -105,7 +106,7 @@ class mini_cactpot:
                 self.choices_remaining -= 1
                 
             else:
-                print("ERROR!! - Invalid input! (remaining options: ", str(self.remaining_choices)[1:-1].replace("'",'') + ')')
+                print("Invalid input! (remaining options: ", str(self.remaining_choices)[1:-1].replace("'",'') + ')')
 
 
     def print_hintbox(self):
@@ -140,14 +141,11 @@ class mini_cactpot:
                 self.sum_row(player_input.upper())
                 awaiting_input = False
             else:
-                print("\n>>>>>>>>>><<<<<<<<<<\n"\
-                    ">> Invalid input! <<  -  Please input one of the following:\n"\
-                    ">>>>>>>>>><<<<<<<<<<    \[A, B, C, D, E, F, G\]\n")
+                print("Invalid input! (valid options: ", str(self.valid_rows)[1:-1].replace("'",'') + ')')
     
     
     def valid_row(self, row):
-        valid_rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
-        if row in valid_rows:
+        if row in self.valid_rows:
             return True
     
     
@@ -157,7 +155,7 @@ class mini_cactpot:
     
     
     def print_winbox(self):
-        print("\n\n D    E   F   G    H\n   -------------\n"\
+        print("\n\n D    E   F   G    H\n    -------------\n"\
         " C  | "+self.grid_values[0]+" | "+self.grid_values[1]+" | "+self.grid_values[2]+" |\n"\
         "    |---|---|---|\n"\
         " B  | "+self.grid_values[3]+" | "+self.grid_values[4]+" | "+self.grid_values[5]+" |\n"\
@@ -189,13 +187,14 @@ class mini_cactpot:
             self.sum = int(self.grid_values[7]) + int(self.grid_values[4]) + int(self.grid_values[1])
         elif row == 'G':
             self.sum = int(self.grid_values[8]) + int(self.grid_values[5]) + int(self.grid_values[2])
+        elif row == 'H':
+            self.sum = int(self.grid_values[8]) + int(self.grid_values[4]) + int(self.grid_values[6])
             
      
     def print_divider(self):
         print("==========================")
         
-    def print_error(self, message):
-        return
+    
     
     def print_payouts(self):
         print("\n =============== Payout ================"\
@@ -216,3 +215,4 @@ def main():
     
 if __name__ == "__main__":
     main()
+    
